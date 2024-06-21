@@ -54,7 +54,9 @@ extension CustomTextStyle on TextStyle {
 class CustomTextStyles {
   // Body text style
   static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(
+
     color: appTheme.black900,
+    fontSize: 20,
   );
 
   static get bodyLargeMohamedamerEBNELNILE =>

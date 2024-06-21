@@ -36,7 +36,7 @@ class CustomPinCodeTextField extends StatelessWidget {
   Widget get pinCodeTextFieldWidget => PinCodeTextField(
     appContext: context,
     controller: controller,
-    length: 4,
+    length: 6,
     keyboardType: TextInputType.number,
     textStyle: textstyle ?? CustomTextStyles.titleMediumInterGray600,
     hintStyle: hintstyle ?? CustomTextStyles.titleMediumInterGray600,

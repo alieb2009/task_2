@@ -253,6 +253,6 @@ class LoginScreen extends GetWidget<LoginController> {
 
   /// Navigates to the signUpScreen when the action is triggered.
   void onTapCreateAccountButton() {
-    //Get.toNamed(AppRoutes.signUpScreen);
+    Get.toNamed(AppRoutes.signUpScreen);
   }
 }

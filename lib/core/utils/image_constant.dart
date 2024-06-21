@@ -8,18 +8,18 @@ class ImageConstant {
   static String imgEllipse1 = '$imagePath/img_ellipse_1.png';
 
   // Login images
-  static String imgEllipse1_204x126 = '$imagePath/img_ellipse_1_204x126.png';
+  static String imgback = '$imagePath/img_back.png';
 
   // Sign up images
-  static String imgGroup33 = '$imagePath/img_group_33.svg';
+  static String imgCircle = '$imagePath/img_circle.png';
 
-  static String imgCamera = '$imagePath/img_camera.svg';
+  static String imgCamera = '$imagePath/img_camera.png';
 
   static String imgThumbsUpGreen100 = '$imagePath/img_thumbsup_green_100.svg';
 
   static String imgEye = '$imagePath/img_eye.png';
 
-  static String imgTwitter = '$imagePath/img_twitter.svg';
+  static String img_upload = '$imagePath/img_upload.png';
 
   static String imgEllipse1_204x136 = '$imagePath/img_ellipse_1_204x136.png';
 

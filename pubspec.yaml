@@ -44,6 +44,16 @@ dependencies:
   pin_code_fields:
   sms_autofill:
   intl:
+  flutter_native_splash:
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  background_image: assets/images/background.png
+  image: assets/images/img_rectangle_11.png
+  android_12:
+    image: assets/images/img_rectangle_11.png
+    background_image: assets/images/background.png
 
 dev_dependencies:
   flutter_test:

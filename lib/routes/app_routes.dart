@@ -5,10 +5,12 @@ import '../core/app_export.dart';
 // import '../presentation/authenticated_screen/binding/authenticated_binding.dart';
 // import '../presentation/fuls_screen/binding/fuls_binding.dart';
 // import '../presentation/fuls_screen/fuls_screen.dart';
+import '../presentation/authenticated_screen/authenticated_screen.dart';
+import '../presentation/authenticated_screen/binding/authenticated_binding.dart';
 import '../presentation/login_screen/binding/login_binding.dart';
 import '../presentation/login_screen/login_screen.dart';
-// import '../presentation/sign_up_screen/binding/sign_up_binding.dart';
-// import '../presentation/sign_up_screen/sign_up_screen.dart';
+import '../presentation/sign_up_screen/binding/sign_up_binding.dart';
+import '../presentation/sign_up_screen/sign_up_screen.dart';
 // import '../presentation/splach_screen/binding/splach_binding.dart';
 // import '../presentation/splach_screen/splach_screen.dart';
 
@@ -29,6 +31,17 @@ class AppRoutes {
       page: () => LoginScreen(),
       bindings: [LoginBinding()],
     ),
+    GetPage(
+      name: signUpScreen,
+      page: () => SignUpScreen(),
+      bindings: [SignUpBinding()],
+    ),
+    GetPage(
+      name: authenticatedScreen,
+      page: () => AuthenticatedScreen(),
+      bindings: [AuthenticatedBinding()],
+    ),
+
 
     GetPage(
       name: initialRoute,
