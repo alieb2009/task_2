@@ -17,38 +17,19 @@ class SignUpScreen extends GetWidget<SignUpController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true, // Allow the screen to adjust when the keyboard appears
         body: Form(
           key: _formKey,
-          child: SizedBox(
-            width: 392.h,
-            child: Column(
-              children: [
-                SizedBox(height: 140.v),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        _buildUserDetailsSection(),
-                        _buildConfirmationSection(),
-                        // SizedBox(height: 12.v),
-                        // SizedBox(
-                        //   height: 432.v,
-                        //   width: double.maxFinite,
-                        //   child: Stack(
-                        //     alignment: Alignment.center,
-                        //     children: [
-                        //
-                        //
-                        //
-                        //     ],
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+          child: SingleChildScrollView( // Scrollable view to avoid covering fields
+            child: SizedBox(
+              width: 392.h,
+              child: Column(
+                children: [
+                  SizedBox(height: 100.v),
+                  _buildUserDetailsSection(),
+                  _buildConfirmationSection(),
+                ],
+              ),
             ),
           ),
         ),
@@ -63,9 +44,8 @@ class SignUpScreen extends GetWidget<SignUpController> {
       child: Column(
         children: [
           Container(
-            height: 130.v,
-            width: 94.h,
-
+            height: 125.v,
+            width: 140.h,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -76,8 +56,8 @@ class SignUpScreen extends GetWidget<SignUpController> {
                 ),
                 CustomImageView(
                   imagePath: ImageConstant.imgCamera,
-                  height: 44.v,
-                  width: 42.h,
+                  height: 45.v,
+                  width: 45.h,
                 ),
               ],
             ),
@@ -91,9 +71,9 @@ class SignUpScreen extends GetWidget<SignUpController> {
           SizedBox(height: 18.v),
           _buildPasswordInput(),
           SizedBox(height: 18.v),
-           //_buildConfirmPasswordRow(),
           _buildConfirmPasswordInput(),
-
+          SizedBox(height: 18.v),
+          _buildReferralCode(), // Referral code input field
         ],
       ),
     );
@@ -141,7 +121,7 @@ class SignUpScreen extends GetWidget<SignUpController> {
   Widget _buildMobileNumberInput() {
     return CustomTextFormField(
       controller: controller.mobileNumberInputController,
-      hintText: "Mobile number",
+      hintText: "Whatsapp Mobile number",
       textInputType: TextInputType.phone,
       validator: (value) {
         if (!isValidPhone(value)) {
@@ -149,6 +129,14 @@ class SignUpScreen extends GetWidget<SignUpController> {
         }
         return null;
       },
+    );
+  }
+
+  Widget _buildReferralCode() {
+    return CustomTextFormField(
+      //controller: controller.referralCodeInputController,
+      hintText: "Referral code (optional)",
+      textInputType: TextInputType.text, // Adjusted to text input for alphanumeric codes
     );
   }
 
@@ -187,8 +175,6 @@ class SignUpScreen extends GetWidget<SignUpController> {
     );
   }
 
-
-
   Widget _buildConfirmPasswordInput() {
     return Obx(
           () => CustomTextFormField(
@@ -199,8 +185,7 @@ class SignUpScreen extends GetWidget<SignUpController> {
         textInputType: TextInputType.visiblePassword,
         suffix: InkWell(
           onTap: () {
-            controller.isShowPassword.value =
-            !controller.isShowPassword.value;
+            controller.isShowPassword.value = !controller.isShowPassword.value;
           },
           child: Container(
             margin: EdgeInsets.fromLTRB(30.h, 10.v, 12.h, 14.v),
@@ -233,11 +218,9 @@ class SignUpScreen extends GetWidget<SignUpController> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 26.v),
-          _buildCertificateSection(),
+          SizedBox(height: 46.v),
+          _buildSignUpButton(),
           SizedBox(
-            // height: 204.v,
-            // width: double.maxFinite,
             child: Align(
               alignment: Alignment.topCenter,
               child: Container(
@@ -251,8 +234,9 @@ class SignUpScreen extends GetWidget<SignUpController> {
                         style: CustomTextStyles.bodyLargeBlack900,
                       ),
                       GestureDetector(
-                        onTap: (){Get.toNamed(AppRoutes.loginScreen);
-                            } ,
+                        onTap: () {
+                          Get.toNamed(AppRoutes.loginScreen);
+                        },
                         child: Text(
                           " Log in",
                           style: CustomTextStyles.bodyMediumCabin,
@@ -261,80 +245,9 @@ class SignUpScreen extends GetWidget<SignUpController> {
                     ],
                   ),
                 ),
-
               ),
             ),
           ),
-          // SizedBox(height: 6.v),
-          // SizedBox(
-          //   height: 204.v,
-          //   width: double.maxFinite,
-          //   child: Align(
-          //     alignment: Alignment.topCenter,
-          //     child: RichText(
-          //       text: TextSpan(
-          //         children: [
-          //           TextSpan(
-          //             text: "already have an account",
-          //             style: CustomTextStyles.labelLargePrimaryContainer,
-          //           ),
-          //
-          //
-          //         ],
-          //       ),
-          //       textAlign: TextAlign.left,
-          //     ),
-          //   ),
-          // ),
-          // SizedBox(width: 20.v),
-
-          // SizedBox(
-          //   height: 204.v,
-          //   width: double.maxFinite,
-          //   child: Align(
-          //     alignment: Alignment.topCenter,
-          //     child: RichText(
-          //       text: TextSpan(
-          //         children: [TextSpan(
-          //             text: "Log_in",
-          //             style: theme.textTheme.labelLarge,
-          //           ),
-          //
-          //         ],
-          //       ),
-          //       textAlign: TextAlign.left,
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCertificateSection() {
-    return Container(
-      width: double.maxFinite,
-      // margin: EdgeInsets.only(left: 42.h, right: 32.h),
-      child: Column(
-        children: [
-          CustomOutlinedButton(
-            height: 36.v,
-            text: "Certificate PDF file",
-            margin: EdgeInsets.only(left: 74.h, right: 72.h),
-            righticon: Container(
-              margin: EdgeInsets.only(left: 12.h),
-              child: CustomImageView(
-                imagePath: ImageConstant.img_upload,
-                height: 16.v,
-                width: 18.h,
-              ),
-            ),
-            buttonstyle: CustomButtonStyles.outlineBlueGray,
-            buttonTextStyle:CustomTextStyles.titleMediumGreen20001_1,
-          ),
-          SizedBox(height: 46.v),
-          _buildSignUpButton(),
-           //_buildConfirmationSection(),
         ],
       ),
     );

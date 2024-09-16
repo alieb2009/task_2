@@ -15,39 +15,17 @@ class LoginScreen extends GetWidget<LoginController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true, // Allows the screen to adjust when the keyboard appears
         body: Form(
           key: _formKey,
-          child: SizedBox(
-            width: 392.h,
+          child: SingleChildScrollView( // Wrap the content in SingleChildScrollView
             child: Column(
               children: [
                 SizedBox(height: 6.v),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      height: 858.v,
-                      margin: EdgeInsets.only(left: 4.h),
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                _buildEmailStack(),
-                                _buildEmailRow(),
-                                SizedBox(height: 14.v),
-                                _buildMobileNumberColumn(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                _buildEmailStack(),
+                _buildEmailRow(),
+                SizedBox(height: 14.v),
+                _buildMobileNumberColumn(),
               ],
             ),
           ),
@@ -58,37 +36,31 @@ class LoginScreen extends GetWidget<LoginController> {
 
   /// Section Widget
   Widget _buildEmailInput() {
-    return Expanded(
-      child: CustomTextFormField(
-        controller: controller.emailInputController,
-        hintText: "email",
-        // textstyle:TextThemes.textTheme(ColorSchemes.lightCodeColorScheme).bodyLarge,
-        // fillColor:appTheme.green100,
-
-
-        textInputType: TextInputType.emailAddress,
-        suffix: Container(
-          margin: EdgeInsets.fromLTRB(30.h, 12.v, 15.h, 12.v),
-          child: CustomImageView(
-            imagePath: ImageConstant.imgThumbsUp,
-            height: 25.v,
-            width: 14.h,
-          ),
+    return CustomTextFormField(
+      controller: controller.emailInputController,
+      hintText: "email",
+      textInputType: TextInputType.emailAddress,
+      suffix: Container(
+        margin: EdgeInsets.fromLTRB(20.h, 15.v, 15.h, 15.v),
+        child: CustomImageView(
+          imagePath: ImageConstant.imgThumbsUp,
+          height: 20.v,
+          width: 20.h,
         ),
-        suffixConstraints: BoxConstraints(
-          maxHeight: 50.v,
-        ),
-        validator: (value) {
-          if (value == null || !isValidEmail(value, isRequired: true)) {
-            return "please enter valid email";
-          }
-          return null;
-        },
-        contentPadding: EdgeInsets.only(
-          left: 12.h,
-          top: 10.v,
-          bottom: 10.v,
-        ),
+      ),
+      suffixConstraints: BoxConstraints(
+        maxHeight: 50.v,
+      ),
+      validator: (value) {
+        if (value == null || !isValidEmail(value, isRequired: true)) {
+          return "please enter valid email";
+        }
+        return null;
+      },
+      contentPadding: EdgeInsets.only(
+        left: 12.h,
+        top: 10.v,
+        bottom: 10.v,
       ),
     );
   }
@@ -102,7 +74,9 @@ class LoginScreen extends GetWidget<LoginController> {
         bottom: 6.v,
       ),
       child: Row(
-        children: [_buildEmailInput()],
+        children: [
+          Expanded(child: _buildEmailInput()), // Wrap with Expanded to fit within the row
+        ],
       ),
     );
   }
@@ -110,14 +84,14 @@ class LoginScreen extends GetWidget<LoginController> {
   /// Section Widget
   Widget _buildEmailStack() {
     return Container(
-      height: 340.v,
+      height: 450.v,
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 4.h),
       child: Column(
         children: [
           CustomImageView(
             imagePath: ImageConstant.imgRectangle5,
-            height: 326.v,
+            height: 450.v,
             width: double.maxFinite,
           ),
         ],
@@ -144,10 +118,10 @@ class LoginScreen extends GetWidget<LoginController> {
   Widget _buildPasswordInput() {
     return CustomTextFormField(
       suffix: Container(
-        margin: EdgeInsets.fromLTRB(30.h, 12.v, 15.h, 12.v),
+        margin: EdgeInsets.fromLTRB(20.h, 15.v, 15.h, 15.v),
         child: CustomImageView(
           imagePath: ImageConstant.imgEye,
-          height: 25.v,
+          height: 20.v,
           width: 20.h,
         ),
       ),
@@ -182,7 +156,7 @@ class LoginScreen extends GetWidget<LoginController> {
   Widget _buildCreateAccountButton() {
     return CustomOutlinedButton(
       text: "create new account",
-      buttonTextStyle:TextThemes.textTheme(ColorSchemes.lightCodeColorScheme).bodyLarge,
+      buttonTextStyle: TextThemes.textTheme(ColorSchemes.lightCodeColorScheme).bodyLarge,
       buttonstyle: CustomButtonStyles.outlineGreenTL18,
       onPressed: () {
         onTapCreateAccountButton();
@@ -218,14 +192,12 @@ class LoginScreen extends GetWidget<LoginController> {
               children: [
                 Row(
                   children: [
-                     CustomImageView(
-                        margin: EdgeInsets.fromLTRB(0.h, 0.v, 2.h, 0.v),
-                        imagePath: ImageConstant.imgCheckmark,
-                        height: 14.v,
-                        width: 10.h,
-                      ),
-
-
+                    CustomImageView(
+                      margin: EdgeInsets.fromLTRB(0.h, 0.v, 2.h, 0.v),
+                      imagePath: ImageConstant.imgCheckmark,
+                      height: 14.v,
+                      width: 14.h,
+                    ),
                     Text(
                       "remember me",
                       style: CustomTextStyles.bodyMediumCabin,
@@ -239,7 +211,7 @@ class LoginScreen extends GetWidget<LoginController> {
               ],
             ),
           ),
-          SizedBox(height: 132.v),
+          SizedBox(height: 20.v),
           _buildCreateAccountButton(),
         ],
       ),
@@ -248,7 +220,7 @@ class LoginScreen extends GetWidget<LoginController> {
 
   /// Navigates to the FullScreen when the action is triggered.
   void onTapLoginButton() {
-    //Get.toNamed(AppRoutes.fulsScreen);
+    // Get.toNamed(AppRoutes.fulsScreen);
   }
 
   /// Navigates to the signUpScreen when the action is triggered.

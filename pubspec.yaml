@@ -51,9 +51,13 @@ flutter_native_splash:
   web: false
   background_image: assets/images/background.png
   image: assets/images/img_rectangle_11.png
+  android_gravity: fill_vertical
+  ios_content_mode: scaleAspectFill
   android_12:
     image: assets/images/img_rectangle_11.png
     background_image: assets/images/background.png
+    android_gravity: fill_vertical
+    ios_content_mode: scaleAspectFill
 
 dev_dependencies:
   flutter_test:

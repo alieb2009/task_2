@@ -5,14 +5,7 @@ import '/widgets/custom_elevated_button.dart';
 import '../../core/utils/image_constant.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_pin_code_text_field.dart';
-// import './success_bottomsheet/controller/success_controller.dart';
-// import '../success_bottomsheet/success_bottomsheet.dart';
-// import './wrong_messge_dialog/controller/wrong_messge_controller.dart';
-// import './wrong_messge_dialog/wrong_messge_dialog.dart';
 import 'controller/authenticated_controller.dart'; // ignore_for_file: must_be_immutable
-////////////////////
-/////////////////
-
 
 class AuthenticatedScreen extends GetWidget<AuthenticatedController> {
   const AuthenticatedScreen({Key? key}) : super(key: key);
@@ -21,66 +14,42 @@ class AuthenticatedScreen extends GetWidget<AuthenticatedController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SizedBox(
-          width: 392.h,
-          child: Column(
-            children: [
-              SizedBox(height: 20.v),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Container(
-                    height: 934.v,
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
+        resizeToAvoidBottomInset: true, // Allows screen to adjust when the keyboard is visible
+        body: SingleChildScrollView( // Makes the screen scrollable
+          child: SizedBox(
+            width: 392.h,
+            child: Column(
+              children: [
+                SizedBox(height: 20.v),
+                _buildImageSection(),
+                SizedBox(height: 12.v),
+                Padding(
+                  padding: EdgeInsets.only(left: 26.h),
+                  child: RichText(
+                    text: TextSpan(
                       children: [
-                        // CustomImageView(
-                        //   imagePath: ImageConstant.imgCircle,
-                        //   height: 204.v,
-                        //   width: 90.h,
-                        // ),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildImageSection(),
-                              SizedBox(height: 12.v),
-                              Padding(
-                                padding: EdgeInsets.only(left: 26.h),
-                                child: RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: "Verification Code",
-                                        style: CustomTextStyles.titleLargeCabinPrimaryContainer,
-                                      ),
-                                      TextSpan(
-                                        text: "\n".tr,
-                                        style: Theme.of(context).textTheme.titleLarge,
-                                      ),
-                                      TextSpan(
-                                        text: "We have sent the verification code to your email address",
-                                        style: CustomTextStyles.bodyLargeBlack900,
-                                      ),
-                                    ],
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                              SizedBox(height: 76.v),
-                              _buildOtpSection(),
-                              SizedBox(height: 74.v),
-                            ],
-                          ),
+                        TextSpan(
+                          text: "Verification Code",
+                          style: CustomTextStyles.titleLargeCabinPrimaryContainer,
+                        ),
+                        TextSpan(
+                          text: "\n".tr,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        TextSpan(
+                          text: "We have sent the verification code to your email address",
+                          style: CustomTextStyles.bodyLargeBlack900,
                         ),
                       ],
                     ),
+                    textAlign: TextAlign.left,
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 76.v),
+                _buildOtpSection(), // OTP Section (PIN Code input)
+                SizedBox(height: 74.v),
+              ],
+            ),
           ),
         ),
       ),
@@ -115,7 +84,7 @@ class AuthenticatedScreen extends GetWidget<AuthenticatedController> {
                 children: [
                   CustomImageView(
                     imagePath: ImageConstant.imgRectangle5,
-                    height: 118.v,
+                    height: 250.v,
                     width: 220.h,
                     margin: EdgeInsets.only(right: 8.h),
                   ),
@@ -173,32 +142,20 @@ class AuthenticatedScreen extends GetWidget<AuthenticatedController> {
     );
   }
 
-  /// Displays a dialog with the [WrongMessageDialog] content.
+  /// Method to handle resend OTP action
   void onTapTxtSendAgain() {
     Get.dialog(
       AlertDialog(
         backgroundColor: Colors.transparent,
         contentPadding: EdgeInsets.zero,
         insetPadding: EdgeInsets.zero,
-        // content: WrongMessageDialog(
-        //   Get.put(WrongMessageController()),
-        // ),
       ),
     );
   }
 
-  /// Displays a scrollable bottom sheet widget using the [Get] package
-  /// and the [SuccessBottomsheet] widget.
-  ///
-  /// The bottom sheet is controlled by the [SuccessController]
-  /// and is displayed using the [Get.bottomSheet] method with
-  /// [isScrollControlled] set to true.
+  /// Method to handle successful OTP entry and proceed
   void onTapNext() {
-    // Get.bottomSheet(
-    //   SuccessBottomsheet(
-    //     Get.put(SuccessController()),
-    //   ),
-    //   isScrollControlled: true,
-    // );
+    // You can navigate to the next screen or show a bottom sheet
+    // Get.bottomSheet(SuccessBottomsheet(Get.put(SuccessController())), isScrollControlled: true);
   }
 }
